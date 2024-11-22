@@ -12,21 +12,27 @@
         <form id="loginForm">
             <div>
                 <label for="email">Email</label>
-                <input type="email" id="email" required>
+                <input type="email" id="email" placeholder="Enter your email" required>
             </div>
             <div>
                 <label for="password">Password</label>
-                <input type="password" id="password" required>
+                <input type="password" id="password" placeholder="Enter your password" required>
             </div>
             <button type="submit">Login</button>
+            <p id="error-message" style="color: red; display: none;"></p>
         </form>
         <p>Don't have an account? <a href="register.html">Register here</a></p>
     </div>
+    
     <script>
         document.getElementById('loginForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+
+            // Reset the error message
+            errorMessage.style.display = 'none';
 
             fetch('http://localhost:3000/login', {
                 method: 'POST',
@@ -41,11 +47,17 @@
                     alert('Login Successful');
                     // Redirect to another page or store token for session
                     localStorage.setItem('authToken', data.token);
+                    window.location.href = "dashboard.html";  // Example redirection
                 } else {
-                    alert('Invalid credentials!');
+                    errorMessage.textContent = 'Invalid credentials. Please try again.';
+                    errorMessage.style.display = 'block';
                 }
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => {
+                console.error('Error:', error);
+                errorMessage.textContent = 'Something went wrong. Please try again later.';
+                errorMessage.style.display = 'block';
+            });
         });
     </script>
 </body>

@@ -10,9 +10,10 @@
     <div class="container">
         <h1>Register</h1>
         <form id="registerForm">
+            <!-- Updated 'name' to 'username' -->
             <div>
-                <label for="username">Username</label>
-                <input type="text" id="username" required>
+                <label for="username">Username</label> <!-- Changed to 'Username' -->
+                <input type="text" id="username" required> <!-- Changed 'name' to 'username' -->
             </div>
             <div>
                 <label for="email">Email</label>
@@ -29,7 +30,7 @@
     <script>
         document.getElementById('registerForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            const username = document.getElementById('username').value;
+            const username = document.getElementById('username').value; // Changed 'name' to 'username'
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
@@ -38,19 +39,19 @@
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username, email, password })
+                body: JSON.stringify({ username, email, password }) // Updated key to 'username'
             })
             .then(response => response.json())
             .then(data => {
-                if (data.message === 'User registered successfully.') {
+                if (data.message === 'User registered successfully') {
                     alert('Registration successful!');
-                    // Redirect to login page
+                    // Redirect to login page after successful registration
                     window.location.href = 'login.html';
                 } else {
-                    alert(data.message);
+                    alert(data.message); // Displays error message if registration fails
                 }
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => console.error('Error:', error)); // Error logging in case of request failure
         });
     </script>
 </body>
