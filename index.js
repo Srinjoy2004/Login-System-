@@ -93,6 +93,11 @@ app.post('/login', async (req, res) => {
         return res.status(400).json({ message: 'Invalid password' });
       }
 
+      // Ensure the JWT_SECRET is available in environment variables
+      if (!process.env.JWT_SECRET) {
+        return res.status(500).json({ message: 'JWT_SECRET is missing in the environment' });
+      }
+
       // Generate a JWT token
       const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
