@@ -29,7 +29,7 @@ This repository contains a **Node.js-based authentication system** integrated wi
 ### Setup Instructions  
 1. Clone this repository:  
    ```bash  
-   git clone https://github.com/yourusername/node-authentication-system.git  
+   git clone git@github.com:Srinjoy2004/Login-System-.git  
 
  
 2. Navigate to the project directory:  
